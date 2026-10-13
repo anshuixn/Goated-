@@ -3,21 +3,18 @@ import BabyPanda from './BabyPanda';
 import CuteButton from './CuteButton';
 import FloatingDecorations from './FloatingDecorations';
 import HeartBurst from './HeartBurst';
+import { playHugSound, playPandaReaction } from '../utils/audioSystem';
 import './BirthdayReveal.css';
 
-const FRIENDSHIP_PARAGRAPHS = [
-  "You know, I think one of the most beautiful things in life is finding a person with whom you can simply be yourself. Someone with whom even the most random conversations become memories, the smallest moments become stories, and an ordinary day can somehow become a little more special.",
-  "I think that’s what true friendship is really about. It’s not about talking every single day or always knowing the perfect thing to say. It’s about understanding each other even when words fall short, being able to laugh at the silliest things, and knowing that even on the days when life feels a little heavy, there’s someone who genuinely wishes the best for you.",
-  "Real friendship doesn’t have to be loud to be meaningful. Sometimes, it’s in a small check-in, a stupid joke that makes you laugh when you need it most, or the comfort of knowing that someone accepts you as you are, without expecting you to be perfect.",
-  "And on your birthday, I hope you remember just how deserving you are of that kind of happiness. I hope life gives you countless reasons to smile, people who appreciate the person you are, dreams that make you excited to wake up every morning, and little moments that you’ll look back on someday and smile about all over again.",
-  "May you never feel that you have to change who you are to be loved or appreciated. May you always find people who celebrate your happiness, respect your feelings, and stand beside you when things aren’t so easy.",
-  "Thank you for being you, Shreya. I hope this new chapter of your life brings you beautiful surprises, genuine happiness, unforgettable memories, and the kind of friendships that make life feel a little warmer.",
-  "And if there’s one thing I hope you carry with you beyond this birthday, it’s this: the best friendships aren’t measured by how often people talk, but by how genuinely they care. They’re the ones that make you feel understood, accepted, and a little less alone in this big, complicated world.",
-  "So today, I hope you feel celebrated, appreciated, and surrounded by all the little things that make you happy.",
-  "Keep smiling, keep being your wonderful self, and never forget that you deserve all the good things life has to offer."
+const GREETING = "Hello Shreya,";
+
+const HINGLISH_PARAGRAPHS = [
+  "I know that idhar kuch time se main tumse bahut achhe se baat nahi kar pa raha, time nahi de pa raha. But the thing is ki I know that you have faced various problems and I have always tried to be with you. I have always tried to stay by your side and help you with however ways I can.",
+  "Abhi I know tumhare NEET ke exams aane wale hain, toh you are in great pressure for that. But I know tum kar logi.",
+  "Not about just this NEET exams. I know tum apne life mein bhi achhe aur successful post tak zaroor pahunchogi aur apne saare dreams ko achieve karogi."
 ];
 
-const FINAL_WISH = "Happiest Birthday once again, Shreya. May this year be as lovely as the happiness you bring into the lives of the people around you. 🎂🐼💗";
+const FINAL_WISH = "Happiest birthday, Shreya. ❤️";
 
 const BirthdayReveal: React.FC = () => {
   const [isHugging, setIsHugging] = useState(false);
@@ -27,6 +24,11 @@ const BirthdayReveal: React.FC = () => {
     if (isHugging) return;
     setIsHugging(true);
     setShowHugHearts(true);
+
+    // Warm comforting hug sound + happy panda reaction
+    playHugSound();
+    playPandaReaction('giggle');
+
     setTimeout(() => {
       setIsHugging(false);
       setShowHugHearts(false);
@@ -99,7 +101,7 @@ const BirthdayReveal: React.FC = () => {
           </div>
         </div>
 
-        {/* ── Editorial Friendship Birthday Message Letter ── */}
+        {/* ── Editorial Romanized Hinglish Birthday Message Letter ── */}
         <article className="birthday-letter-card reveal-message" aria-label="Birthday letter for Shreya">
           <div className="letter-card-header" aria-hidden="true">
             <span className="letter-stamp">💌 FROM A TRUE FRIEND</span>
@@ -111,7 +113,11 @@ const BirthdayReveal: React.FC = () => {
           </div>
 
           <div className="letter-body">
-            {FRIENDSHIP_PARAGRAPHS.map((paragraph, idx) => (
+            {/* Salutation Greeting */}
+            <p className="letter-greeting">{GREETING}</p>
+
+            {/* Paragraphs in natural Romanized Hinglish */}
+            {HINGLISH_PARAGRAPHS.map((paragraph, idx) => (
               <p key={idx} className="letter-paragraph">
                 {paragraph}
               </p>

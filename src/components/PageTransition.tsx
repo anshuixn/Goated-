@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { playRevealChime } from '../utils/audioSystem';
 import './PageTransition.css';
 
 interface PageTransitionProps {
@@ -12,6 +13,8 @@ const PageTransition: React.FC<PageTransitionProps> = ({ isRevealing, onRevealCo
   useEffect(() => {
     if (!isRevealing) return;
     setPhase('tear');
+    // Synchronize sparkle & celebratory chime with reveal animation
+    playRevealChime();
     const t = setTimeout(() => {
       setPhase('done');
       onRevealComplete();

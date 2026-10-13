@@ -4,6 +4,12 @@ import type { PandaExpression } from './BabyPanda';
 import CuteButton from './CuteButton';
 import FloatingDecorations from './FloatingDecorations';
 import HeartBurst from './HeartBurst';
+import {
+  playPop,
+  playBubblePop,
+  playCrossSound,
+  playPandaReaction,
+} from '../utils/audioSystem';
 import './QuestionCard.css';
 
 export const Q1_NO_MESSAGES = [
@@ -84,21 +90,33 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ questionNumber, onYes }) =>
     setNoClickCount(newCount);
     setBubbleKey((prev) => prev + 1);
 
-    // Dynamic panda expression based on NO clicks
+    // B. NO button: Distinct bubble pop sound
+    playBubblePop();
+
+    // D. Panda reaction sound based on click progress
     if (newCount === 1) {
       triggerPandaAnim('tilt', 'curious');
+      playPandaReaction('curious');
     } else if (newCount >= 2 && newCount <= 4) {
       triggerPandaAnim('tilt', 'curious');
+      playPandaReaction('bloop');
     } else if (newCount >= 5 && newCount <= 9) {
       triggerPandaAnim('tilt', 'suspicious');
+      playPandaReaction('curious');
     } else {
       triggerPandaAnim('bounce', 'suspicious');
+      playPandaReaction('giggle');
     }
   }, [noClickCount, yesClicked, triggerPandaAnim]);
 
   const handleYes = useCallback(() => {
     if (yesClicked) return;
     setYesClicked(true);
+
+    // A. Normal button: Soft pop sound
+    playPop();
+    playPandaReaction('chirp');
+
     triggerPandaAnim('bounce', 'excited');
     setShowHearts(true);
     setTimeout(() => {
@@ -310,6 +328,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ questionNumber, onYes }) =>
                 className="fullscreen-tiny-no-link"
                 onClick={(e) => {
                   e.stopPropagation();
+                  playCrossSound();
                   handleNo();
                 }}
                 disabled={yesClicked}
