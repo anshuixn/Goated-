@@ -6,15 +6,14 @@ import HeartBurst from './HeartBurst';
 import { playHugSound, playPandaReaction } from '../utils/audioSystem';
 import './BirthdayReveal.css';
 
-const GREETING = "Hello Shreya,";
+const GREETING = "Hello Shreya, ❤️";
 
 const HINGLISH_PARAGRAPHS = [
-  "I know that idhar kuch time se main tumse bahut achhe se baat nahi kar pa raha, time nahi de pa raha. But the thing is ki I know that you have faced various problems and I have always tried to be with you. I have always tried to stay by your side and help you with however ways I can.",
-  "Abhi I know tumhare NEET ke exams aane wale hain, toh you are in great pressure for that. But I know tum kar logi.",
-  "Not about just this NEET exams. I know tum apne life mein bhi achhe aur successful post tak zaroor pahunchogi aur apne saare dreams ko achieve karogi."
+  "I know ki idhar kuch time se main tumse achhe se baat nahi kar pa raha, tumhe time nahi de pa raha. But I want you to know ki I genuinely care about you. I know tumne kaafi problems face ki hain, and I’ve always tried to be by your side and help you in whatever way I could. Shayad main har baar sab kuch theek na kar paun, but I’ve always wanted to be there for you.",
+  "Abhi tumhare NEET exams bhi aa rahe hain, and I know tum kaafi pressure mein hogi, but trust me, tum kar logi. Not just NEET, I genuinely hope ki tum apni life mein bahut aage badho, apne saare dreams achieve karo, and ek din apni success par proud feel karo. You deserve happiness, success, and all the good things life has to offer."
 ];
 
-const FINAL_WISH = "Happiest birthday, Shreya. ❤️";
+const FINAL_WISH = "Happiest birthday, Shreya. ❤️🫂 Hamesha khush rehna, khud par believe karna, and never stop chasing your dreams. I genuinely wish the best for you, always. ✨";
 
 const BirthdayReveal: React.FC = () => {
   const [isHugging, setIsHugging] = useState(false);
