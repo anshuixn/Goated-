@@ -1,0 +1,91 @@
+/* ── Button Base ─────────────────────────────────────────── */
+
+.cute-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  padding: 0.75em 1.8em;
+  min-height: 44px;
+  min-width: 120px;
+  transition:
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.18s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  transform-origin: center center;
+}
+
+.cute-btn__label {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Primary (pink filled) ── */
+.cute-btn--primary {
+  background: linear-gradient(145deg, #F48CAF 0%, #E896B6 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(244, 140, 175, 0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.cute-btn--primary:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(244, 140, 175, 0.6), inset 0 1px 0 rgba(255,255,255,0.3);
+  transform: scale(1.04) translateY(-1px) !important;
+}
+
+.cute-btn--primary:active:not(:disabled) {
+  transform: scale(0.97) !important;
+  box-shadow: 0 2px 8px rgba(244, 140, 175, 0.4);
+}
+
+/* ── Secondary (outline) ── */
+.cute-btn--secondary {
+  background: rgba(255,255,255,0.85);
+  color: var(--color-pink-deep);
+  border: 2px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(247, 184, 208, 0.2);
+}
+
+.cute-btn--secondary:hover:not(:disabled) {
+  background: var(--color-blush);
+  border-color: var(--color-primary-pink);
+  transform: scale(1.04) !important;
+}
+
+.cute-btn--secondary:active:not(:disabled) {
+  transform: scale(0.97) !important;
+}
+
+/* ── Ghost (subtle) ── */
+.cute-btn--ghost {
+  background: rgba(247, 184, 208, 0.15);
+  color: var(--color-pink-deep);
+  border: 1.5px solid rgba(247, 184, 208, 0.5);
+}
+
+.cute-btn--ghost:hover:not(:disabled) {
+  background: rgba(247, 184, 208, 0.28);
+  border-color: var(--color-primary-pink);
+}
+
+/* ── Disabled ── */
+.cute-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Focus visible ── */
+.cute-btn:focus-visible {
+  outline: 2.5px solid var(--color-pink-deep);
+  outline-offset: 3px;
+}

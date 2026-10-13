@@ -1,0 +1,91 @@
+/* ─── Google Fonts ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap');
+
+/* ─── Design Tokens ────────────────────────────────────── */
+:root {
+  --color-primary-pink: #F7B8D0;
+  --color-blush: #FCE4EC;
+  --color-cream: #FFF9F2;
+  --color-surface: #FFFFFF;
+  --color-butter-yellow: #FFE9A8;
+  --color-yellow-highlight: #FFD66B;
+  --color-text: #624B53;
+  --color-text-light: #9A7A84;
+  --color-border: #F3C6D6;
+  --color-pink-deep: #E896B6;
+  --color-pink-btn: #F48CAF;
+
+  --font-display: 'Fredoka', 'Comfortaa', system-ui, sans-serif;
+  --font-body: 'Nunito', 'Quicksand', system-ui, sans-serif;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 4px 24px rgba(247, 184, 208, 0.28), 0 1px 6px rgba(98, 75, 83, 0.08);
+  --shadow-btn: 0 3px 12px rgba(247, 184, 208, 0.5);
+  --shadow-btn-hover: 0 5px 18px rgba(247, 184, 208, 0.7);
+}
+
+/* ─── Reset ────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-cream);
+  min-height: 100svh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Fluid Typography ─────────────────────────────────── */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-pink);
+  border-radius: 99px;
+}
+
+/* ─── Focus Visible ────────────────────────────────────── */
+:focus-visible {
+  outline: 2.5px solid var(--color-pink-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced Motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

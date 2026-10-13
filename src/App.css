@@ -1,0 +1,30 @@
+/* ── App Root ────────────────────────────────────────────── */
+
+.app-root {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Scene wrapper ────────────────────────────────────────── */
+
+.scene-wrapper {
+  min-height: 100svh;
+  width: 100%;
+}
+
+/* Smooth fade-in for each scene */
+.scene-enter {
+  animation: sceneEnter 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes sceneEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,75 @@
+/* ── Decoration Animations ───────────────────────────────── */
+
+.decorations-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── Floating Hearts ── */
+.float-heart {
+  position: absolute;
+  animation: heartFloat var(--duration, 4s) ease-in-out var(--delay, 0s) infinite;
+  opacity: 0.85;
+}
+
+@keyframes heartFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* ── Stars / Sparkles ── */
+.sparkle-star {
+  position: absolute;
+  animation: starTwinkle 3s ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { transform: scale(1) rotate(0deg);   opacity: 0.8; }
+  50%       { transform: scale(1.2) rotate(20deg); opacity: 1; }
+}
+
+/* ── Flowers ── */
+.float-flower {
+  position: absolute;
+  animation: flowerSway 5s ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes flowerSway {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50%       { transform: rotate(8deg) scale(1.05); }
+}
+
+/* ── Balloons ── */
+.balloon-pink,
+.balloon-yellow,
+.balloon-pink-2 {
+  position: absolute;
+  animation: balloonFloat 6s ease-in-out var(--delay, 0s) infinite;
+}
+
+.balloon-yellow { --delay: 1s; }
+.balloon-pink-2 { --delay: 2s; }
+
+@keyframes balloonFloat {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%       { transform: translateY(-20px) rotate(4deg); }
+}
+
+/* ── Confetti ── */
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color, #F7B8D0);
+  border-radius: 2px;
+  animation: confettiFall 4s ease-in var(--delay, 0s) infinite;
+  opacity: 0;
+}
+
+@keyframes confettiFall {
+  0%   { opacity: 1; transform: translateY(-20px) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(60px) rotate(360deg); }
+}

@@ -1,0 +1,24 @@
+/* ── Heart Burst ───────────────────────────────────────── */
+
+.heart-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.heart-burst__heart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  animation: heartPop 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes heartPop {
+  0%   { opacity: 1; transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--tx), calc(var(--ty) - 20px)) scale(0.8); }
+}

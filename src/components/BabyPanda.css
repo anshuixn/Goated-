@@ -1,0 +1,43 @@
+/* ── Panda Animations ────────────────────────────────────── */
+
+.panda-wrapper {
+  will-change: transform;
+  transform-origin: center bottom;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Gentle float idle */
+.panda-idle {
+  animation: pandaFloat 3.6s ease-in-out infinite;
+}
+
+@keyframes pandaFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Happy bounce */
+.panda-bounce {
+  animation: pandaBounce 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1;
+}
+
+@keyframes pandaBounce {
+  0%   { transform: translateY(0) scale(1); }
+  25%  { transform: translateY(-18px) scale(1.04, 0.96); }
+  55%  { transform: translateY(0) scale(0.96, 1.04); }
+  75%  { transform: translateY(-8px) scale(1.02, 0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Curious tilt */
+.panda-tilt {
+  animation: pandaTilt 0.5s ease-in-out 1;
+}
+
+@keyframes pandaTilt {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-9deg); }
+  70%  { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
+}

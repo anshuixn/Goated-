@@ -1,0 +1,176 @@
+/* ── Birthday Scene ──────────────────────────────────────── */
+
+.birthday-scene {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem);
+  background-color: var(--color-blush);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(247, 184, 208, 0.35) 0%, transparent 50%),
+    radial-gradient(circle at 80% 85%, rgba(255, 233, 168, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 40%);
+  overflow: hidden;
+}
+
+/* ── Content block ───────────────────────────────────────── */
+
+.birthday-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.8rem, 2.5vw, 1.4rem);
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+}
+
+/* ── Panda ───────────────────────────────────────────────── */
+
+.birthday-panda-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.birthday-panda-wrap > .panda-wrapper {
+  width: clamp(160px, 40vw, 240px) !important;
+}
+
+/* ── Cake ────────────────────────────────────────────────── */
+
+.birthday-cake {
+  /* Positioned slightly left for visual asymmetry */
+  margin-top: -0.5rem;
+}
+
+/* ── Heading ─────────────────────────────────────────────── */
+
+.birthday-heading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.birthday-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.15;
+}
+
+.birthday-heading__name {
+  color: var(--color-pink-deep);
+  display: inline-block;
+  position: relative;
+}
+
+.birthday-heading__name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-pink), var(--color-yellow-highlight));
+  border-radius: 99px;
+}
+
+.heading-ribbon {
+  margin-top: 0.3rem;
+  opacity: 0.6;
+}
+
+/* ── Message ─────────────────────────────────────────────── */
+
+.birthday-message-wrap {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
+  max-width: 480px;
+  width: 100%;
+}
+
+.birthday-message {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+/* ── Actions ─────────────────────────────────────────────── */
+
+.birthday-actions {
+  margin-top: 0.4rem;
+}
+
+/* ── Staggered entrance animations ──────────────────────── */
+
+.reveal-panda {
+  animation: revealSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+}
+
+.reveal-cake {
+  animation: revealSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+.reveal-heading {
+  animation: revealSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
+.reveal-message {
+  animation: revealFadeIn 0.7s ease 0.65s both;
+}
+
+.reveal-actions {
+  animation: revealFadeIn 0.7s ease 0.9s both;
+}
+
+@keyframes revealSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes revealFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Tablet+ ─────────────────────────────────────────────── */
+
+@media (min-width: 601px) {
+  .birthday-panda-wrap > .panda-wrapper {
+    width: 240px !important;
+  }
+
+  .birthday-content {
+    gap: 1.5rem;
+  }
+}
+
+/* ── Desktop ─────────────────────────────────────────────── */
+
+@media (min-width: 1025px) {
+  .birthday-content {
+    max-width: 580px;
+    gap: 1.6rem;
+  }
+
+  .birthday-heading {
+    font-size: clamp(2.4rem, 3.5vw, 3rem);
+  }
+}
