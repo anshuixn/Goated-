@@ -7,7 +7,6 @@ import HeartBurst from './HeartBurst';
 import {
   playPop,
   playBubblePop,
-  playCrossSound,
   playPandaReaction,
 } from '../utils/audioSystem';
 import './QuestionCard.css';
@@ -163,11 +162,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ questionNumber, onYes }) =>
   const currentMessageIndex = Math.min(Math.max(0, noClickCount - 1), content.messages.length - 1);
   const currentMessage = noClickCount > 0 ? content.messages[currentMessageIndex] : null;
 
-  // YES button scale inside the card (capped at index 5 before full-screen takeover at 6+)
+  // YES button scale inside the card (smooth progressive growth capped at comfortable maximum)
   const currentScale = YES_SCALES[Math.min(noClickCount, YES_SCALES.length - 1)];
-
-  // Full-screen YES takeover triggers at 6 or more NO clicks
-  const isFullScreenYes = noClickCount >= 6;
 
   return (
     <div className="question-scene">
@@ -191,7 +187,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ questionNumber, onYes }) =>
           />
         </div>
 
-        {/* ── Panda Speech Bubble for 12 sequential messages ── */}
+        {/* ── Panda Speech Bubble for sequential messages ── */}
         {currentMessage && (
           <div
             key={bubbleKey}
@@ -242,7 +238,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ questionNumber, onYes }) =>
             </CuteButton>
           </div>
 
-          {/* NO Button — Remains interactive and triggers YES growth */}
+          {/* NO Button — Permanently interactive and visible, never disappears */}
           <div
             className="no-btn-wrapper"
             aria-live="polite"
@@ -260,86 +256,6 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ questionNumber, onYes }) =>
           </div>
         </div>
       </div>
-
-      {/* ── 2.3 & 2.4 FULL-SCREEN YES STATE (Visual takeover at 6+ clicks) ── */}
-      {isFullScreenYes && (
-        <div
-          className="fullscreen-yes-takeover"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Full screen invitation to select YES"
-          onClick={handleYes}
-        >
-          {/* Ambient sparkling background */}
-          <div className="fullscreen-yes-backdrop" aria-hidden="true">
-            <span className="fs-glow fs-glow-1" />
-            <span className="fs-glow fs-glow-2" />
-          </div>
-
-          <div
-            className="fullscreen-yes-card"
-            onClick={(e) => e.stopPropagation()} // Card container
-          >
-            <div className="fullscreen-yes-panda">
-              <BabyPanda
-                expression={pandaExpression}
-                animate="bounce"
-                size={180}
-              />
-            </div>
-
-            {/* Speech bubble in takeover */}
-            {currentMessage && (
-              <div
-                key={`fs-${bubbleKey}`}
-                className="panda-speech-bubble fullscreen-bubble"
-                role="status"
-                aria-live="polite"
-              >
-                <div className="speech-bubble-tail" aria-hidden="true" />
-                <p className="speech-bubble-text">{currentMessage}</p>
-              </div>
-            )}
-
-            <h2 className="fullscreen-yes-title">
-              There is only one answer now, Shreya! 🎀
-            </h2>
-            <p className="fullscreen-yes-subtitle">
-              (Look how big and irresistible the YES button has become!)
-            </p>
-
-            {/* Massive interactive YES button */}
-            <button
-              id={`fullscreen-yes-btn-q${questionNumber}`}
-              className="fullscreen-giant-yes-btn"
-              onClick={handleYes}
-              disabled={yesClicked}
-              aria-label={content.yesLabel}
-              autoFocus
-            >
-              <span className="giant-yes-sparkles" aria-hidden="true">✨ 💖 ✨</span>
-              <span className="giant-yes-text">{content.yesLabel}</span>
-              <span className="giant-yes-tap-hint">Tap anywhere to say YES!</span>
-            </button>
-
-            {/* Optional tiny NO button allows reading messages up to message 12 */}
-            {noClickCount < 12 && (
-              <button
-                className="fullscreen-tiny-no-link"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  playCrossSound();
-                  handleNo();
-                }}
-                disabled={yesClicked}
-                aria-label="Refuse once more"
-              >
-                <span>…still saying nope? 🙈 ({noClickCount}/12)</span>
-              </button>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

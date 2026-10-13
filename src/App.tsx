@@ -3,7 +3,7 @@ import QuestionCard from './components/QuestionCard';
 import BirthdayReveal from './components/BirthdayReveal';
 import PageTransition from './components/PageTransition';
 import AudioControls from './components/AudioControls';
-import { initAutoplayTrigger } from './utils/musicManager';
+import { initBackgroundMusic } from './utils/musicManager';
 import './App.css';
 
 type Scene = 'q1' | 'q2' | 'revealing' | 'birthday';
@@ -12,9 +12,9 @@ const App: React.FC = () => {
   const [scene, setScene] = useState<Scene>('q1');
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Initialize background music autoplay on first valid user interaction
+  // Attempt automatic background music playback on page load
   useEffect(() => {
-    initAutoplayTrigger();
+    initBackgroundMusic();
   }, []);
 
   const handleQ1Yes = useCallback(() => {

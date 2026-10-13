@@ -167,13 +167,15 @@
 
 /* ── 2. Growing YES Button and Actions ───────────────────── */
 
+/* ── 2. Growing YES Button and Actions ───────────────────── */
+
 .question-card__buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1.25rem;
   width: 100%;
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
 }
 
 /* YES button wrapper that smoothly scales */
@@ -212,13 +214,15 @@
   100% { transform: scale(1.15); opacity: 1; }
 }
 
-/* NO button wrapper */
+/* NO button wrapper — permanently stable, visible, and interactive */
 .no-btn-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 44px;
+  min-height: 48px;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .playable-no-btn {
@@ -238,201 +242,6 @@
 @keyframes candleFlicker {
   0%   { opacity: 1;   transform: scaleX(1); }
   100% { opacity: 0.85; transform: scaleX(1.05); }
-}
-
-/* ── 2.3 & 2.4 FULL-SCREEN YES STATE (Visual Takeover) ───── */
-
-.fullscreen-yes-takeover {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(1rem, 4vw, 2rem);
-  background: linear-gradient(145deg, rgba(255, 192, 213, 0.96) 0%, rgba(244, 140, 175, 0.96) 50%, rgba(232, 150, 182, 0.96) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  animation: fullscreenFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-  cursor: pointer;
-  overflow-y: auto;
-}
-
-.fullscreen-yes-backdrop {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.fs-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.5;
-}
-
-.fs-glow-1 {
-  width: 320px;
-  height: 320px;
-  background: #FFE9A8;
-  top: 10%;
-  left: 10%;
-  animation: floatGlow 5s ease-in-out infinite alternate;
-}
-
-.fs-glow-2 {
-  width: 360px;
-  height: 360px;
-  background: #FFFFFF;
-  bottom: 10%;
-  right: 10%;
-  animation: floatGlow 6s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes floatGlow {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(30px, 30px); }
-}
-
-.fullscreen-yes-card {
-  position: relative;
-  z-index: 2;
-  background: #FFFFFF;
-  border: 2px solid #F3C6D6;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 16px 48px rgba(98, 75, 83, 0.22), 0 0 0 6px rgba(255, 255, 255, 0.4);
-  padding: clamp(1.8rem, 5vw, 2.8rem) clamp(1.4rem, 5vw, 2.4rem);
-  max-width: 480px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.1rem;
-  animation: fullscreenCardPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  cursor: default;
-}
-
-.fullscreen-yes-panda {
-  display: flex;
-  justify-content: center;
-}
-
-.fullscreen-bubble {
-  max-width: 340px;
-  background: #FFF5F8;
-}
-
-.fullscreen-yes-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 4.5vw, 1.85rem);
-  font-weight: 700;
-  color: var(--color-text);
-  line-height: 1.25;
-  margin: 0;
-}
-
-.fullscreen-yes-subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(0.85rem, 2.4vw, 0.95rem);
-  color: var(--color-text-light);
-  margin: -0.4rem 0 0.4rem 0;
-}
-
-/* Massive, irresistible YES Button */
-.fullscreen-giant-yes-btn {
-  width: 100%;
-  max-width: 360px;
-  padding: clamp(1.1rem, 3.5vw, 1.4rem) 1.8rem;
-  background: linear-gradient(135deg, #F48CAF 0%, #E26892 100%);
-  border: none;
-  border-radius: var(--radius-pill);
-  box-shadow:
-    0 8px 28px rgba(226, 104, 146, 0.55),
-    inset 0 2px 0 rgba(255, 255, 255, 0.4);
-  color: #FFFFFF;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  animation: giantPulse 1.8s ease-in-out infinite;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  outline: none;
-}
-
-.fullscreen-giant-yes-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 12px 34px rgba(226, 104, 146, 0.7), inset 0 2px 0 rgba(255, 255, 255, 0.5);
-}
-
-.fullscreen-giant-yes-btn:active {
-  transform: scale(0.98);
-}
-
-.giant-yes-sparkles {
-  font-size: 1.1rem;
-}
-
-.giant-yes-text {
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 3.8vw, 1.55rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.giant-yes-tap-hint {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  opacity: 0.9;
-  font-weight: 500;
-}
-
-@keyframes giantPulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 8px 28px rgba(226, 104, 146, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.4);
-  }
-  50% {
-    transform: scale(1.035);
-    box-shadow: 0 12px 36px rgba(226, 104, 146, 0.75), inset 0 2px 0 rgba(255, 255, 255, 0.5);
-  }
-}
-
-.fullscreen-tiny-no-link {
-  background: none;
-  border: none;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--color-text-light);
-  cursor: pointer;
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--radius-pill);
-  opacity: 0.75;
-  transition: opacity 0.15s ease, color 0.15s ease;
-}
-
-.fullscreen-tiny-no-link:hover {
-  opacity: 1;
-  color: var(--color-pink-deep);
-  text-decoration: underline;
-}
-
-@keyframes fullscreenFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes fullscreenCardPop {
-  from {
-    opacity: 0;
-    transform: scale(0.88) translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 }
 
 /* ── Tablet & Desktop ────────────────────────────────────── */
@@ -458,10 +267,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .yes-btn-growth-wrapper,
-  .panda-speech-bubble,
-  .fullscreen-yes-takeover,
-  .fullscreen-giant-yes-btn {
+  .panda-speech-bubble {
     animation: none !important;
     transition: none !important;
   }
 }
+

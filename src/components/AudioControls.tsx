@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { isMusicPlaying, toggleMusic, subscribeMusic } from '../utils/musicManager';
+import { isMusicMuted, toggleMusicMute, subscribeMusic } from '../utils/musicManager';
 import { isSfxMuted, toggleSfx, subscribeSfx, playControlFeedback } from '../utils/audioSystem';
 import './AudioControls.css';
 
 const AudioControls: React.FC = () => {
-  const [playing, setPlaying] = useState(isMusicPlaying());
+  const [muted, setMuted] = useState(isMusicMuted());
   const [sfxOff, setSfxOff] = useState(isSfxMuted());
 
   useEffect(() => {
-    const unsubMusic = subscribeMusic((isPlaying) => setPlaying(isPlaying));
+    const unsubMusic = subscribeMusic(({ isMuted }) => setMuted(isMuted));
     const unsubSfx = subscribeSfx((isMuted) => setSfxOff(isMuted));
     return () => {
       unsubMusic();
@@ -16,9 +16,9 @@ const AudioControls: React.FC = () => {
     };
   }, []);
 
-  const handleToggleMusic = () => {
+  const handleToggleMusicMute = () => {
     playControlFeedback();
-    toggleMusic();
+    toggleMusicMute();
   };
 
   const handleToggleSfx = () => {
@@ -28,30 +28,32 @@ const AudioControls: React.FC = () => {
 
   return (
     <aside className="audio-controls-dock" aria-label="Audio settings">
-      {/* Background Music Button */}
+      {/* Background Music Mute / Unmute Button */}
       <button
         type="button"
         id="toggle-music-btn"
-        className={`audio-btn ${playing ? 'audio-btn--active' : 'audio-btn--paused'}`}
-        onClick={handleToggleMusic}
-        title={playing ? 'Pause music' : 'Play music'}
-        aria-label={playing ? 'Pause background music' : 'Play background music'}
-        aria-pressed={playing}
+        className={`audio-btn ${!muted ? 'audio-btn--active' : 'audio-btn--paused'}`}
+        onClick={handleToggleMusicMute}
+        title={!muted ? 'Mute background music' : 'Unmute background music'}
+        aria-label={!muted ? 'Mute background music' : 'Unmute background music'}
+        aria-pressed={!muted}
       >
         <span className="audio-btn__icon" aria-hidden="true">
-          {playing ? '🎵' : '🔇'}
+          {!muted ? '🎵' : '🔇'}
         </span>
         <span className="audio-btn__label">
-          {playing ? 'Music: On' : 'Music: Off'}
+          {!muted ? 'Music: On' : 'Music: Muted'}
         </span>
-        {playing && <span className="audio-wave-bars" aria-hidden="true">
-          <span className="bar bar-1" />
-          <span className="bar bar-2" />
-          <span className="bar bar-3" />
-        </span>}
+        {!muted && (
+          <span className="audio-wave-bars" aria-hidden="true">
+            <span className="bar bar-1" />
+            <span className="bar bar-2" />
+            <span className="bar bar-3" />
+          </span>
+        )}
       </button>
 
-      {/* Sound Effects Button */}
+      {/* Sound Effects Independent Toggle */}
       <button
         type="button"
         id="toggle-sfx-btn"
