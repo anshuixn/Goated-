@@ -23,216 +23,460 @@ interface BabyPandaProps {
 const BabyPanda: React.FC<BabyPandaProps> = ({
   expression = 'happy',
   variant = 'normal',
-  size = 180,
+  size = 190,
   animate = 'idle',
   className = '',
 }) => {
   const isBirthday = variant === 'birthday';
 
-  /* ── Mouth paths ── */
-  const mouthPath: Record<PandaExpression, string> = {
-    happy:      'M 44 70 Q 50 77 56 70',
-    waving:     'M 43 69 Q 50 77 57 69',
-    curious:    'M 45 70 Q 50 74 55 70',
-    suspicious: 'M 44 71 Q 50 74 56 71',
-    excited:    'M 42 68 Q 50 79 58 68',
-    celebrate:  'M 41 67 Q 50 80 59 67',
-    hugging:    'M 43 70 Q 50 77 57 70',
-  };
-
-  /* ── Eyes ── */
-  const renderEyes = () => {
-    if (expression === 'suspicious') {
-      return (
-        <g>
-          <ellipse cx="37" cy="57" rx="9" ry="6" fill="#1a1a1a" stroke="#1a1a1a" strokeWidth="0.5" />
-          <circle cx="39.5" cy="55.5" r="2.5" fill="white" />
-          <circle cx="40.5" cy="54.5" r="1" fill="white" opacity="0.5" />
-          <ellipse cx="63" cy="57" rx="9" ry="6" fill="#1a1a1a" stroke="#1a1a1a" strokeWidth="0.5" />
-          <circle cx="65.5" cy="55.5" r="2.5" fill="white" />
-          <circle cx="66.5" cy="54.5" r="1" fill="white" opacity="0.5" />
-        </g>
-      );
-    }
+  /* ── Mouth rendering based on expression ── */
+  const renderMouth = () => {
     if (expression === 'excited' || expression === 'celebrate') {
       return (
-        <g>
-          <circle cx="37" cy="57" r="10" fill="#1a1a1a" />
-          <circle cx="41" cy="53.5" r="3.5" fill="white" />
-          <circle cx="42.5" cy="52" r="1.5" fill="white" opacity="0.6" />
-          <circle cx="34.5" cy="60" r="1.5" fill="white" />
-          <circle cx="63" cy="57" r="10" fill="#1a1a1a" />
-          <circle cx="67" cy="53.5" r="3.5" fill="white" />
-          <circle cx="68.5" cy="52" r="1.5" fill="white" opacity="0.6" />
-          <circle cx="60.5" cy="60" r="1.5" fill="white" />
+        <g id="panda-mouth">
+          {/* Philtrum line */}
+          <line x1="100" y1="102" x2="100" y2="105" stroke="#4A3E44" strokeWidth="1.8" strokeLinecap="round" />
+          {/* Open happy baby smile */}
+          <path
+            d="M 92 105 Q 100 106 108 105 C 108 116 92 116 92 105 Z"
+            fill="#F48CAF"
+            stroke="#4A3E44"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+          {/* Cute tongue */}
+          <path
+            d="M 95 109 Q 100 107 105 109 C 104 114 96 114 95 109 Z"
+            fill="#FFBACD"
+          />
         </g>
       );
     }
+
+    if (expression === 'suspicious') {
+      return (
+        <g id="panda-mouth">
+          <line x1="100" y1="102" x2="100" y2="105" stroke="#4A3E44" strokeWidth="1.8" strokeLinecap="round" />
+          {/* Gentle questioning pout */}
+          <path
+            d="M 94 107 Q 99 105.5 105 107"
+            stroke="#4A3E44"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            fill="none"
+          />
+        </g>
+      );
+    }
+
     if (expression === 'curious') {
       return (
-        <g>
-          <circle cx="37" cy="57" r="9" fill="#1a1a1a" />
-          <circle cx="40.5" cy="54" r="3" fill="white" />
-          <circle cx="42" cy="52.5" r="1.2" fill="white" opacity="0.5" />
-          <circle cx="63" cy="56" r="10" fill="#1a1a1a" />
-          <circle cx="67" cy="52.5" r="3.5" fill="white" />
-          <circle cx="68.5" cy="51" r="1.5" fill="white" opacity="0.5" />
+        <g id="panda-mouth">
+          <line x1="100" y1="102" x2="100" y2="105.5" stroke="#4A3E44" strokeWidth="1.8" strokeLinecap="round" />
+          {/* Small gentle "o" / curious smile */}
+          <path
+            d="M 94 106.5 Q 97 109.5 100 106.5 Q 103 109.5 106 106.5"
+            stroke="#4A3E44"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            fill="none"
+          />
         </g>
       );
     }
+
+    // Default friendly baby panda double smile
     return (
-      <g>
-        <circle cx="37" cy="57" r="9.5" fill="#1a1a1a" />
-        <circle cx="41" cy="53.5" r="3.5" fill="white" />
-        <circle cx="42.5" cy="52" r="1.5" fill="white" opacity="0.5" />
-        <circle cx="34.5" cy="60" r="1.5" fill="white" opacity="0.4" />
-        <circle cx="63" cy="57" r="9.5" fill="#1a1a1a" />
-        <circle cx="67" cy="53.5" r="3.5" fill="white" />
-        <circle cx="68.5" cy="52" r="1.5" fill="white" opacity="0.5" />
-        <circle cx="60.5" cy="60" r="1.5" fill="white" opacity="0.4" />
+      <g id="panda-mouth">
+        <line x1="100" y1="102" x2="100" y2="105" stroke="#4A3E44" strokeWidth="1.8" strokeLinecap="round" />
+        <path
+          d="M 93 105.5 Q 96.5 109 100 105.5 Q 103.5 109 107 105.5"
+          stroke="#4A3E44"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          fill="none"
+        />
       </g>
     );
   };
 
-  /* ── Arms ── */
+  /* ── Eyes inside distinct panda eye patches ── */
+  const renderEyes = () => {
+    if (expression === 'suspicious') {
+      return (
+        <g id="panda-eyes">
+          {/* Left eye squinting cutely */}
+          <ellipse cx="75" cy="87" rx="6.5" ry="4.2" fill="#161418" />
+          <circle cx="77" cy="85.5" r="2.2" fill="#FFFFFF" />
+          <circle cx="73" cy="88" r="1.1" fill="#FFFFFF" opacity="0.8" />
+
+          {/* Right eye squinting */}
+          <ellipse cx="125" cy="87" rx="6.5" ry="4.2" fill="#161418" />
+          <circle cx="127" cy="85.5" r="2.2" fill="#FFFFFF" />
+          <circle cx="123" cy="88" r="1.1" fill="#FFFFFF" opacity="0.8" />
+        </g>
+      );
+    }
+
+    if (expression === 'excited' || expression === 'celebrate') {
+      return (
+        <g id="panda-eyes">
+          {/* Left glossy eye with big sparkles */}
+          <circle cx="75" cy="86" r="8" fill="#141216" />
+          <circle cx="78" cy="83" r="3.4" fill="#FFFFFF" />
+          <circle cx="72.5" cy="89" r="1.8" fill="#FFFFFF" opacity="0.9" />
+          <circle cx="79" cy="87.5" r="1.1" fill="#FFFFFF" opacity="0.8" />
+
+          {/* Right glossy eye with big sparkles */}
+          <circle cx="125" cy="86" r="8" fill="#141216" />
+          <circle cx="128" cy="83" r="3.4" fill="#FFFFFF" />
+          <circle cx="122.5" cy="89" r="1.8" fill="#FFFFFF" opacity="0.9" />
+          <circle cx="129" cy="87.5" r="1.1" fill="#FFFFFF" opacity="0.8" />
+        </g>
+      );
+    }
+
+    if (expression === 'curious') {
+      return (
+        <g id="panda-eyes">
+          {/* Left eye */}
+          <circle cx="75" cy="86" r="7.5" fill="#151316" />
+          <circle cx="77.8" cy="83.5" r="3" fill="#FFFFFF" />
+          <circle cx="73" cy="88.5" r="1.5" fill="#FFFFFF" opacity="0.85" />
+
+          {/* Right eye slightly wide */}
+          <circle cx="125" cy="85.5" r="8.2" fill="#151316" />
+          <circle cx="128" cy="82.8" r="3.3" fill="#FFFFFF" />
+          <circle cx="122.5" cy="88.5" r="1.7" fill="#FFFFFF" opacity="0.9" />
+        </g>
+      );
+    }
+
+    // Default friendly baby eyes with double white catchlights
+    return (
+      <g id="panda-eyes">
+        {/* Left eye */}
+        <circle cx="75" cy="86.5" r="7.5" fill="#151316" />
+        <circle cx="77.5" cy="83.8" r="3" fill="#FFFFFF" />
+        <circle cx="73" cy="89" r="1.5" fill="#FFFFFF" opacity="0.85" />
+
+        {/* Right eye */}
+        <circle cx="125" cy="86.5" r="7.5" fill="#151316" />
+        <circle cx="127.5" cy="83.8" r="3" fill="#FFFFFF" />
+        <circle cx="123" cy="89" r="1.5" fill="#FFFFFF" opacity="0.85" />
+      </g>
+    );
+  };
+
+  /* ── Arms & Limbs (Black arms and legs, true giant panda anatomy) ── */
   const renderArms = () => {
     if (expression === 'waving') {
       return (
-        <g>
-          {/* left arm resting */}
-          <ellipse cx="22" cy="142" rx="12" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(-10 22 142)" />
-          {/* right arm raised */}
-          <ellipse cx="81" cy="112" rx="11" ry="9" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(-55 81 112)" />
-          {/* hand tip */}
-          <ellipse cx="77" cy="104" rx="8" ry="6" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(-55 77 104)" />
+        <g id="panda-arms">
+          {/* Left black arm resting gently */}
+          <path
+            d="M 54 135 C 38 142 36 166 52 170 C 65 172 74 158 70 144 C 67 136 60 133 54 135 Z"
+            fill="#232126"
+            stroke="#19171B"
+            strokeWidth="0.8"
+          />
+          {/* Paw pad on resting arm */}
+          <ellipse cx="50" cy="158" rx="5" ry="3.8" fill="#36323B" transform="rotate(-15 50 158)" />
+
+          {/* Right arm raised waving */}
+          <g className="panda-paw-wave">
+            <path
+              d="M 144 136 C 158 130 178 116 172 98 C 166 84 148 92 138 108 C 130 120 136 132 144 136 Z"
+              fill="#232126"
+              stroke="#19171B"
+              strokeWidth="0.8"
+            />
+            {/* Waving paw beans */}
+            <ellipse cx="163" cy="98" rx="5.5" ry="4.5" fill="#36323B" transform="rotate(-25 163 98)" />
+            <circle cx="157" cy="91" r="2" fill="#36323B" />
+            <circle cx="163" cy="89" r="2" fill="#36323B" />
+            <circle cx="169" cy="91" r="2" fill="#36323B" />
+          </g>
         </g>
       );
     }
-    if (expression === 'celebrate') {
+
+    if (expression === 'celebrate' || expression === 'excited') {
       return (
-        <g>
-          <ellipse cx="16" cy="120" rx="12" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(45 16 120)" />
-          <ellipse cx="84" cy="120" rx="12" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(-45 84 120)" />
+        <g id="panda-arms">
+          {/* Both arms raised up joyfully \o/ */}
+          {/* Left raised arm */}
+          <path
+            d="M 58 136 C 44 130 24 114 30 96 C 36 82 54 90 64 106 C 72 118 66 132 58 136 Z"
+            fill="#232126"
+            stroke="#19171B"
+            strokeWidth="0.8"
+          />
+          <ellipse cx="38" cy="96" rx="5.5" ry="4.5" fill="#36323B" transform="rotate(25 38 96)" />
+          <circle cx="32" cy="89" r="2" fill="#36323B" />
+          <circle cx="38" cy="87" r="2" fill="#36323B" />
+          <circle cx="44" cy="89" r="2" fill="#36323B" />
+
+          {/* Right raised arm */}
+          <path
+            d="M 142 136 C 156 130 176 114 170 96 C 164 82 146 90 136 106 C 128 118 134 132 142 136 Z"
+            fill="#232126"
+            stroke="#19171B"
+            strokeWidth="0.8"
+          />
+          <ellipse cx="162" cy="96" rx="5.5" ry="4.5" fill="#36323B" transform="rotate(-25 162 96)" />
+          <circle cx="156" cy="89" r="2" fill="#36323B" />
+          <circle cx="162" cy="87" r="2" fill="#36323B" />
+          <circle cx="168" cy="89" r="2" fill="#36323B" />
         </g>
       );
     }
+
     if (expression === 'hugging') {
       return (
-        <g>
-          <ellipse cx="19" cy="135" rx="14" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(25 19 135)" />
-          <ellipse cx="81" cy="135" rx="14" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(-25 81 135)" />
+        <g id="panda-arms" className="panda-arms-hug">
+          {/* Left arm wrapped inward around tummy/viewer */}
+          <path
+            d="M 50 136 C 35 142 38 168 62 172 C 80 174 95 165 92 152 C 90 144 76 140 68 141 C 58 134 52 134 50 136 Z"
+            fill="#232126"
+            stroke="#19171B"
+            strokeWidth="0.8"
+          />
+          <ellipse cx="84" cy="158" rx="5" ry="4" fill="#36323B" />
+
+          {/* Right arm wrapped inward around tummy/viewer */}
+          <path
+            d="M 150 136 C 165 142 162 168 138 172 C 120 174 105 165 108 152 C 110 144 124 140 132 141 C 142 134 148 134 150 136 Z"
+            fill="#232126"
+            stroke="#19171B"
+            strokeWidth="0.8"
+          />
+          <ellipse cx="116" cy="158" rx="5" ry="4" fill="#36323B" />
         </g>
       );
     }
+
+    // Default resting / curious / suspicious arms
     return (
-      <g>
-        <ellipse cx="20" cy="138" rx="12" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(-8 20 138)" />
-        <ellipse cx="80" cy="138" rx="12" ry="10" fill="#E0E0E0" stroke="#C8C8C8" strokeWidth="0.8" transform="rotate(8 80 138)" />
+      <g id="panda-arms">
+        {/* Left arm */}
+        <path
+          d="M 55 135 C 38 142 38 168 56 172 C 70 174 78 159 74 145 C 70 136 62 133 55 135 Z"
+          fill="#232126"
+          stroke="#19171B"
+          strokeWidth="0.8"
+        />
+        <ellipse cx="54" cy="160" rx="5" ry="4" fill="#36323B" transform="rotate(-10 54 160)" />
+
+        {/* Right arm */}
+        <path
+          d="M 145 135 C 162 142 162 168 144 172 C 130 174 122 159 126 145 C 130 136 138 133 145 135 Z"
+          fill="#232126"
+          stroke="#19171B"
+          strokeWidth="0.8"
+        />
+        <ellipse cx="146" cy="160" rx="5" ry="4" fill="#36323B" transform="rotate(10 146 160)" />
       </g>
     );
   };
 
   const animClass = {
-    idle:   'panda-idle',
+    idle: 'panda-idle',
     bounce: 'panda-bounce',
-    tilt:   'panda-tilt',
-    none:   '',
+    tilt: 'panda-tilt',
+    none: '',
   }[animate];
 
   return (
     <div
       className={`panda-wrapper ${animClass} ${className}`}
       style={{ width: size, height: 'auto', display: 'inline-block' }}
-      aria-label="Cute baby panda character"
+      aria-label="Adorable baby giant panda"
       role="img"
     >
       <svg
-        viewBox="0 0 100 200"
+        viewBox="0 0 200 240"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
+        className="panda-svg"
       >
-        {/* ── Birthday Hat ── */}
-        {isBirthday && (
-          <g>
-            {/* Hat cone */}
-            <polygon points="50,2 32,33 68,33" fill="#F7B8D0" stroke="#F48CAF" strokeWidth="0.8" strokeLinejoin="round" />
-            {/* Stripes */}
-            <line x1="41" y1="32" x2="35" y2="8" stroke="#F48CAF" strokeWidth="2.5" strokeLinecap="round" opacity="0.6" />
-            <line x1="52" y1="33" x2="50" y2="3" stroke="#F48CAF" strokeWidth="2.5" strokeLinecap="round" opacity="0.6" />
-            {/* Brim */}
-            <rect x="30" y="31" width="40" height="7" rx="3.5" fill="#FFD66B" stroke="#FFB347" strokeWidth="0.5" />
-            {/* Star on tip */}
-            <path d="M50 2 L51.2 5.8 L55.2 5.8 L52 8.2 L53.2 12 L50 9.6 L46.8 12 L48 8.2 L44.8 5.8 L48.8 5.8Z" fill="#FFD66B" />
-          </g>
-        )}
+        <defs>
+          {/* Soft plush shading gradients */}
+          <radialGradient id="pandaHeadShade" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="85%" stopColor="#FAF7F8" />
+            <stop offset="100%" stopColor="#F0E8EB" />
+          </radialGradient>
 
-        {/* ── Ears ── */}
-        <ellipse cx="21" cy="38" rx="14" ry="13" fill="#1a1a1a" />
-        <ellipse cx="21" cy="38" rx="9" ry="8" fill="#2d2d2d" />
-        <ellipse cx="79" cy="38" rx="14" ry="13" fill="#1a1a1a" />
-        <ellipse cx="79" cy="38" rx="9" ry="8" fill="#2d2d2d" />
+          <radialGradient id="pandaBellyShade" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stopColor="#FFFFFF" />
+            <stop offset="80%" stopColor="#FAF8FA" />
+            <stop offset="100%" stopColor="#EFE8EB" />
+          </radialGradient>
 
-        {/* ── Head ── */}
-        <ellipse cx="50" cy="62" rx="37" ry="35" fill="#FAFAFA" stroke="#E8E8E8" strokeWidth="1" />
+          <radialGradient id="earDepth" cx="45%" cy="45%" r="50%">
+            <stop offset="0%" stopColor="#353138" />
+            <stop offset="100%" stopColor="#1E1C21" />
+          </radialGradient>
 
-        {/* ── Eye patches ── */}
-        <ellipse cx="37" cy="60" rx="15" ry="14" fill="#1a1a1a" />
-        <ellipse cx="63" cy="60" rx="15" ry="14" fill="#1a1a1a" />
-
-        {/* ── Eyes ── */}
-        {renderEyes()}
-
-        {/* ── Nose ── */}
-        <ellipse cx="50" cy="70" rx="5.5" ry="4" fill="#1a1a1a" />
-        <ellipse cx="48.5" cy="68.5" rx="2" ry="1.2" fill="#3a3a3a" />
-
-        {/* ── Mouth ── */}
-        <path
-          d={mouthPath[expression]}
-          stroke="#9A7A84"
-          strokeWidth="2"
-          strokeLinecap="round"
-          fill="none"
-        />
-
-        {/* ── Cheeks ── */}
-        <ellipse cx="25" cy="74" rx="10" ry="7" fill="rgba(247,184,208,0.55)" />
-        <ellipse cx="75" cy="74" rx="10" ry="7" fill="rgba(247,184,208,0.55)" />
-
-        {/* ── Bow (non-birthday) ── */}
-        {!isBirthday && (
-          <g transform="translate(68, 28) rotate(-12)">
-            {/* Left loop */}
-            <ellipse cx="-9" cy="0" rx="8" ry="5.5" fill="#F7B8D0" stroke="#F48CAF" strokeWidth="0.5" />
-            <ellipse cx="-8.5" cy="-1.5" rx="3.5" ry="2" fill="rgba(255,255,255,0.4)" />
-            {/* Right loop */}
-            <ellipse cx="9" cy="0" rx="8" ry="5.5" fill="#F7B8D0" stroke="#F48CAF" strokeWidth="0.5" />
-            <ellipse cx="8.5" cy="-1.5" rx="3.5" ry="2" fill="rgba(255,255,255,0.4)" />
-            {/* Center knot */}
-            <circle cx="0" cy="0" r="4" fill="#F48CAF" />
-            <circle cx="0" cy="-1" r="1.5" fill="rgba(255,255,255,0.3)" />
-          </g>
-        )}
-
-        {/* ── Body ── */}
-        <ellipse cx="50" cy="158" rx="28" ry="30" fill="#F0F0F0" stroke="#E0E0E0" strokeWidth="0.8" />
-        {/* Belly */}
-        <ellipse cx="50" cy="158" rx="18" ry="20" fill="#FAFAFA" />
-
-        {/* ── Arms ── */}
-        {renderArms()}
-
-        {/* ── Legs ── */}
-        <ellipse cx="35" cy="182" rx="13" ry="10" fill="#1a1a1a" transform="rotate(-8 35 182)" />
-        <ellipse cx="65" cy="182" rx="13" ry="10" fill="#1a1a1a" transform="rotate(8 65 182)" />
-        {/* Paw pads */}
-        <ellipse cx="34" cy="185" rx="7.5" ry="4" fill="#2d2d2d" />
-        <ellipse cx="64" cy="185" rx="7.5" ry="4" fill="#2d2d2d" />
+          <filter id="softPlushDrop" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#624B53" floodOpacity="0.1" />
+          </filter>
+        </defs>
 
         {/* ── Ground shadow ── */}
-        <ellipse cx="50" cy="197" rx="24" ry="4" fill="rgba(98,75,83,0.08)" />
+        <ellipse cx="100" cy="228" rx="64" ry="8" fill="rgba(98, 75, 83, 0.12)" />
+
+        {/* ── Party Hat (for birthday screen) ── */}
+        {isBirthday && (
+          <g id="panda-party-hat" transform="translate(0, -2)">
+            {/* Cone */}
+            <polygon
+              points="100,6 78,44 122,44"
+              fill="#F48CAF"
+              stroke="#E27499"
+              strokeWidth="1.2"
+              strokeLinejoin="round"
+            />
+            {/* Striped patterns on hat */}
+            <path d="M 86 44 L 97 12" stroke="#FFE9A8" strokeWidth="3.5" strokeLinecap="round" />
+            <path d="M 98 44 L 103 8" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" opacity="0.8" />
+            <path d="M 110 44 L 106 18" stroke="#FFE9A8" strokeWidth="3" strokeLinecap="round" />
+            {/* Fluffy Brim */}
+            <rect x="74" y="42" width="52" height="8" rx="4" fill="#FFE9A8" stroke="#FCD367" strokeWidth="1" />
+            {/* Yellow star pom-pom at tip */}
+            <path
+              d="M 100 2 L 102 6 L 106 6 L 103 9 L 104 13 L 100 11 L 96 13 L 97 9 L 94 6 L 98 6 Z"
+              fill="#FFD66B"
+              stroke="#E8A926"
+              strokeWidth="0.6"
+            />
+          </g>
+        )}
+
+        {/* ── Ears (Rounded, prominent black panda ears positioned symmetrically near top of head) ── */}
+        {/* Left ear */}
+        <g id="left-panda-ear">
+          <ellipse cx="50" cy="50" rx="20" ry="18" fill="#211F24" transform="rotate(-22 50 50)" />
+          {/* Inner ear soft depth */}
+          <ellipse cx="52" cy="50" rx="12" ry="10" fill="url(#earDepth)" transform="rotate(-22 52 50)" opacity="0.85" />
+        </g>
+        {/* Right ear */}
+        <g id="right-panda-ear">
+          <ellipse cx="150" cy="50" rx="20" ry="18" fill="#211F24" transform="rotate(22 150 50)" />
+          {/* Inner ear soft depth */}
+          <ellipse cx="148" cy="50" rx="12" ry="10" fill="url(#earDepth)" transform="rotate(22 148 50)" opacity="0.85" />
+        </g>
+
+        {/* ── Body Base: Black Shoulder Band & Hind Legs (True Panda Pattern) ── */}
+        {/* Black hind feet */}
+        <ellipse cx="64" cy="214" rx="22" ry="14" fill="#211F24" transform="rotate(-6 64 214)" />
+        <ellipse cx="136" cy="214" rx="22" ry="14" fill="#211F24" transform="rotate(6 136 214)" />
+        {/* Foot pads (toe beans!) */}
+        <ellipse cx="64" cy="216" rx="9" ry="6" fill="#3D3740" />
+        <circle cx="56" cy="208" r="2.8" fill="#3D3740" />
+        <circle cx="64" cy="206" r="3" fill="#3D3740" />
+        <circle cx="72" cy="208" r="2.8" fill="#3D3740" />
+
+        <ellipse cx="136" cy="216" rx="9" ry="6" fill="#3D3740" />
+        <circle cx="128" cy="208" r="2.8" fill="#3D3740" />
+        <circle cx="136" cy="206" r="3" fill="#3D3740" />
+        <circle cx="144" cy="208" r="2.8" fill="#3D3740" />
+
+        {/* Black body saddle / vest band across upper torso */}
+        <path
+          d="M 44 140 C 38 175, 48 214, 100 216 C 152 214, 162 175, 156 140 C 148 126, 126 122, 100 122 C 74 122, 52 126, 44 140 Z"
+          fill="#211F24"
+        />
+
+        {/* Predominantly white baby panda belly */}
+        <ellipse
+          cx="100"
+          cy="176"
+          rx="38"
+          ry="34"
+          fill="url(#pandaBellyShade)"
+          stroke="#EAE2E5"
+          strokeWidth="1"
+        />
+
+        {/* Arms layer (renders dynamically by pose) */}
+        {renderArms()}
+
+        {/* ── Head: Large rounded head with soft baby panda jowls & fluffy silhouette ── */}
+        <path
+          d="M 100 44 C 146 44, 162 68, 160 92 C 158 108, 153 118, 142 128 C 130 138, 116 140, 100 140 C 84 140, 70 138, 58 128 C 47 118, 42 108, 40 92 C 38 68, 54 44, 100 44 Z"
+          fill="url(#pandaHeadShade)"
+          stroke="#EAE1E4"
+          strokeWidth="1.2"
+        />
+
+        {/* Subtle fluffy contour tufts on cheeks */}
+        <path d="M 40 96 C 36 98, 36 102, 41 104" stroke="#EAE1E4" strokeWidth="1" fill="none" />
+        <path d="M 160 96 C 164 98, 164 102, 159 104" stroke="#EAE1E4" strokeWidth="1" fill="none" />
+
+        {/* ── DISTINCT PANDA EYE PATCHES (Diagonal organic ovals angled downward-inward) ── */}
+        {/* Left eye patch */}
+        <ellipse
+          cx="74"
+          cy="87"
+          rx="17"
+          ry="13.5"
+          fill="#211F24"
+          transform="rotate(-18 74 87)"
+        />
+        {/* Right eye patch */}
+        <ellipse
+          cx="126"
+          cy="87"
+          rx="17"
+          ry="13.5"
+          fill="#211F24"
+          transform="rotate(18 126 87)"
+        />
+
+        {/* ── Eyes (Tiny expressive baby eyes with bright white catchlights) ── */}
+        {renderEyes()}
+
+        {/* ── Nose: Small, black, rounded triangular panda nose ── */}
+        <path
+          d="M 94 97 C 94 94.5, 106 94.5, 106 97 C 106 100, 102.5 103.5, 100 103.5 C 97.5 103.5, 94 100, 94 97 Z"
+          fill="#211F24"
+        />
+        {/* Delicate nose highlight */}
+        <ellipse cx="98.5" cy="96.5" rx="2" ry="1" fill="#4B454E" />
+
+        {/* ── Mouth directly beneath the nose with natural spacing ── */}
+        {renderMouth()}
+
+        {/* ── Soft Pink Blush on Cheeks (subtle enough that B&W markings dominate) ── */}
+        <ellipse cx="49" cy="107" rx="11" ry="6.5" fill="rgba(247, 184, 208, 0.45)" />
+        <ellipse cx="151" cy="107" rx="11" ry="6.5" fill="rgba(247, 184, 208, 0.45)" />
+
+        {/* ── Tiny Pink Bow (for non-birthday screens, placed adorably near right ear) ── */}
+        {!isBirthday && (
+          <g id="panda-pink-bow" transform="translate(136, 42) rotate(16)">
+            {/* Left ribbon loop */}
+            <path
+              d="M 0 0 C -12 -9, -15 8, 0 0 Z"
+              fill="#F7B8D0"
+              stroke="#F48CAF"
+              strokeWidth="0.8"
+            />
+            {/* Right ribbon loop */}
+            <path
+              d="M 0 0 C 12 -9, 15 8, 0 0 Z"
+              fill="#F7B8D0"
+              stroke="#F48CAF"
+              strokeWidth="0.8"
+            />
+            {/* Center knot */}
+            <circle cx="0" cy="0" r="4" fill="#F48CAF" stroke="#DE6C95" strokeWidth="0.6" />
+            <circle cx="-1" cy="-1" r="1.3" fill="#FFFFFF" opacity="0.6" />
+          </g>
+        )}
       </svg>
     </div>
   );

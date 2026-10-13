@@ -41,3 +41,25 @@
   70%  { transform: rotate(6deg); }
   100% { transform: rotate(0deg); }
 }
+
+/* Waving paw micro-motion */
+.panda-paw-wave {
+  transform-origin: 144px 136px;
+  animation: pawWave 1.4s ease-in-out infinite;
+}
+
+@keyframes pawWave {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-12deg); }
+}
+
+/* Hug arm squeeze */
+.panda-arms-hug {
+  transform-origin: 100px 150px;
+  animation: armsHugSqueeze 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes armsHugSqueeze {
+  0%   { transform: scale(0.98); }
+  100% { transform: scale(1.03); }
+}

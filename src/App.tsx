@@ -13,11 +13,10 @@ const App: React.FC = () => {
   const handleQ1Yes = useCallback(() => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    // Small pause for panda bounce to finish, then switch to Q2
+    setScene('q2');
     setTimeout(() => {
-      setScene('q2');
       setIsTransitioning(false);
-    }, 700);
+    }, 100);
   }, [isTransitioning]);
 
   const handleQ2Yes = useCallback(() => {
