@@ -2,13 +2,13 @@
 
 .audio-controls-dock {
   position: fixed;
-  top: clamp(0.75rem, 2.5vw, 1.25rem);
-  right: clamp(0.75rem, 2.5vw, 1.25rem);
+  top: max(clamp(0.75rem, 2.5vw, 1.25rem), env(safe-area-inset-top, 0px));
+  right: max(clamp(0.75rem, 2.5vw, 1.25rem), env(safe-area-inset-right, 0px));
   z-index: 1000;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1.5px solid var(--color-border);
@@ -25,11 +25,14 @@
 .audio-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
   background: transparent;
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
   padding: 0.35rem 0.65rem;
+  min-height: 44px;
+  min-width: 44px;
   font-family: var(--font-body);
   font-size: clamp(0.72rem, 1.8vw, 0.82rem);
   font-weight: 600;
@@ -39,6 +42,7 @@
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .audio-btn:hover {
@@ -102,13 +106,22 @@
   100% { height: 10px; }
 }
 
-/* Mobile responsive collapse */
+/* Mobile responsive collapse with guaranteed touch targets and safe areas */
 @media (max-width: 480px) {
+  .audio-controls-dock {
+    top: max(0.5rem, env(safe-area-inset-top, 0px));
+    right: max(0.5rem, env(safe-area-inset-right, 0px));
+    gap: 0.35rem;
+    padding: 0.25rem 0.35rem;
+  }
   .audio-btn__label {
     display: none;
   }
   .audio-btn {
-    padding: 0.4rem 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.4rem;
+    justify-content: center;
   }
   .audio-wave-bars {
     display: none;

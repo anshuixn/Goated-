@@ -45,6 +45,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-cream);
   min-height: 100svh;
+  width: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -52,6 +53,8 @@ body {
 
 #root {
   min-height: 100svh;
+  width: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }

@@ -11,7 +11,7 @@ import {
 } from '../utils/audioSystem';
 import './QuestionCard.css';
 
-export const Q1_NO_MESSAGES = [
+const Q1_NO_MESSAGES = [
   "Wait… you’re Shreya, right? 🐼",
   "My little panda heart says otherwise! 💗",
   "Are you sure? I prepared this tiny surprise for you! 🎀",
@@ -26,7 +26,7 @@ export const Q1_NO_MESSAGES = [
   "Last chance, Shreya! Your little surprise is waiting! 🎂",
 ];
 
-export const Q2_NO_MESSAGES = [
+const Q2_NO_MESSAGES = [
   "Wait… today really isn’t your birthday? 🎂",
   "My little panda calendar says otherwise! 🗓️💗",
   "Are you sure? I prepared this tiny birthday surprise for you! 🎀",
